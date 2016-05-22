@@ -1,0 +1,234 @@
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+/*
+* Noto Sans TC (Chinese_traditional) http://www.google.com/fonts/earlyaccess
+ */
+@font-face {
+  font-family: 'Noto Sans TC Thin';
+  font-style: normal;
+  font-weight: 100;
+  src: url(../fonts/NotoSansTC-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans TC Light';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../fonts/NotoSansTC-Light.otf) format('opentype');
+}
+@font-face {
+   font-family: 'Noto Sans TC Regular';
+   font-style: normal;
+   font-weight: 400;
+   src: url(../fonts/NotoSansTC-Regular.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC Medium';
+   font-style: normal;
+   font-weight: 500;
+   src: url(../fonts/NotoSansTC-Medium.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC Bold';
+   font-style: normal;
+   font-weight: 700;
+   src: url(../fonts/NotoSansTC-Bold.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC Black';
+   font-style: normal;
+   font-weight: 900;
+   src: url(../fonts/NotoSansTC-Black.otf) format('opentype');
+ }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 30px;
+  background-image: url("../image/text-background.png");
+  background-attachment: fixed;
+  color: white;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #222;
+}
+
+body > .container-fluid {
+  padding: 60px 15px 0;
+}
+.container-fluid .text-muted {
+  margin: 0;
+  line-height: 30px;
+  text-align: center;
+}
+.footer > .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (max-width: 767px){
+  #folder{
+    padding-left: 10px;
+  }
+  #folder .tag{
+    cursor: pointer;
+  }
+  #folder .tag-success{
+    background-color: #5cb85c;
+  }
+
+  #folder .tag-info{
+    background-color: #5bc0de;
+  }
+
+  #folder .tag-warning{
+    background-color: #f0ad4e;
+  }
+
+  #folder .tag-danger{
+    background-color: #d9534f;
+  }
+  #folder .tag > a {
+    font-family: 'Noto Sans TC Regular', serif;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #folder .tags{
+    width: 20%;
+  }
+  #folder .content{
+    float: right;
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px){
+ #folder {
+   float: left;
+   position: fixed;
+ }
+ #folder > .content {
+  width: 280px;
+  height: 100%;
+  position: fixed;
+ }
+
+  #folder .tag{
+    margin-left: 280px;
+    width: 0px;
+    border-width: 15px 0px 15px 40px;
+    border-style: solid;
+    height: 100px;
+    cursor: pointer;
+  }
+
+  #folder .tag > a {
+    writing-mode: vertical-lr;
+    letter-spacing: 5px;
+    margin-left: -30px;
+    height: 80px;
+    text-align: center;
+    margin-top: -4px;
+    font-family: 'Noto Sans TC Regular', serif;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #folder .tag-success{
+    border-color: transparent #5cb85c transparent #5cb85c;
+  }
+
+  #folder .tag-info{
+    border-color: transparent #5bc0de transparent #5bc0de;
+  }
+
+  #folder .tag-warning{
+    border-color: transparent #f0ad4e transparent #f0ad4e;
+  }
+
+  #folder .tag-danger{
+    border-color: transparent #d9534f transparent #d9534f;
+  }
+  #content {
+    margin-left: 330px;
+  }
+}
+
+#folder > .content-success {
+ background-color: #5cb85c;
+}
+
+#folder > .content-info {
+ background-color: #5bc0de;
+}
+
+#folder > .content-warning {
+ background-color: #f0ad4e;
+}
+
+#folder > .content-danger {
+ background-color: #d9534f;
+}
+
+ #content .paper{
+   padding: 80px 10px 80px 10px;
+   background-color: rgba(255,255,255,0.2);
+ }
+
+ #content .paper .heading{
+   height: 100px;
+ }
+
+ #content .paper .heading > .date{
+   width: 80px;
+   height: 80px;
+   float: left;
+   padding: 10px;
+ }
+
+ #content .paper .heading > .date > table{
+   border: 1px solid;
+   height: inherit;
+   width: inherit;
+ }
+
+ #content .paper .heading > .date > table .date-tr-1 {
+   height: 10%;
+ }
+
+ #content .paper .heading > .date > table .date-tr-1 > td:first-child {
+   text-align: right;
+   padding-right: 2px;
+ }
+ #content .paper .heading > .date > table .date-tr-1 > td:last-child {
+   text-align: left;
+   padding-left: 2px;
+ }
+
+ #content .paper .heading > .date > table .date-tr-2 > td {
+   font-size: 30pt;
+   text-align: center;
+   letter-spacing: 2px;
+ }
+
+ #content .paper .heading>.title{
+   line-height: 100px;
+   font-family: 'Noto Sans TC Bold', serif;
+   font-size: 26pt;
+   padding-left: 100px;
+ }
+
+ #content .paper .text{
+   font-family: 'Noto Sans TC Thin', serif;
+   font-size: medium;
+   padding: 20px;
+   letter-spacing: 1px;
+ }
