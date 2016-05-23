@@ -40,6 +40,12 @@
    font-weight: 900;
    src: url(../fonts/NotoSansTC-Black.otf) format('opentype');
  }
+ @font-face {
+   font-family: 'monaco';
+   font-style: normal;
+   font-weight: 100;
+   src: url(../fonts/monaco.ttf) format('truetype');
+ }
 
 html {
   position: relative;
@@ -50,6 +56,7 @@ body {
   background-image: url("../image/text-background.png");
   background-attachment: fixed;
   color: white;
+  font-family: 'monaco', serif;
 }
 .footer {
   position: fixed;
@@ -131,6 +138,7 @@ body > .container-fluid {
 
   #folder .tag > a {
     writing-mode: vertical-lr;
+    -ms-writing-mode: tb-rl;
     letter-spacing: 5px;
     margin-left: -30px;
     height: 80px;
@@ -207,6 +215,7 @@ body > .container-fluid {
  #content .paper .heading > .date > table .date-tr-1 > td:first-child {
    text-align: right;
    padding-right: 2px;
+   font-family: 'monaco', serif;
  }
  #content .paper .heading > .date > table .date-tr-1 > td:last-child {
    text-align: left;
