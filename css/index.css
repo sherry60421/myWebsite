@@ -45,6 +45,7 @@
    font-style: normal;
    font-weight: 100;
    src: url(../fonts/monaco.ttf) format('truetype');
+   src: url(../fonts/monaco.otf) format('opentype');
  }
 
 html {
