@@ -1,9 +1,3 @@
-
-@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
-
-/*
-* Noto Sans TC (Chinese_traditional) http://www.google.com/fonts/earlyaccess
- */
 @font-face {
   font-family: 'Noto Sans TC Thin';
   font-style: normal;
@@ -81,54 +75,54 @@ body > .container-fluid {
 }
 
 @media (max-width: 767px){
-  #folder{
+  .folder{
     padding-left: 10px;
   }
-  #folder .tag{
+  .folder .tag{
     cursor: pointer;
   }
-  #folder .tag-success{
+  .folder .tag-success{
     background-color: #5cb85c;
   }
 
-  #folder .tag-info{
+  .folder .tag-info{
     background-color: #5bc0de;
   }
 
-  #folder .tag-warning{
+  .folder .tag-warning{
     background-color: #f0ad4e;
   }
 
-  #folder .tag-danger{
+  .folder .tag-danger{
     background-color: #d9534f;
   }
-  #folder .tag > a {
+  .folder .tag > a {
     font-family: 'Noto Sans TC Regular', serif;
     color: white;
     text-decoration: none;
     cursor: pointer;
   }
-  #folder .tags{
+  .folder .tags{
     width: 20%;
   }
-  #folder .content{
+  .folder .content{
     float: right;
     width: 80%;
   }
 }
 
 @media (min-width: 768px){
- #folder {
+ .folder {
    float: left;
    position: fixed;
  }
- #folder > .content {
+ .folder > .folder-content {
   width: 280px;
   height: 100%;
   position: fixed;
  }
 
-  #folder .tag{
+  .folder .tag{
     margin-left: 280px;
     width: 0px;
     border-width: 15px 0px 15px 40px;
@@ -137,7 +131,7 @@ body > .container-fluid {
     cursor: pointer;
   }
 
-  #folder .tag > a {
+  .folder .tag > a {
     writing-mode: vertical-lr;
     -ms-writing-mode: tb-rl;
     letter-spacing: 5px;
@@ -151,92 +145,92 @@ body > .container-fluid {
     cursor: pointer;
   }
 
-  #folder .tag-success{
+  .folder .tag-success{
     border-color: transparent #5cb85c transparent #5cb85c;
   }
 
-  #folder .tag-info{
+  .folder .tag-info{
     border-color: transparent #5bc0de transparent #5bc0de;
   }
 
-  #folder .tag-warning{
+  .folder .tag-warning{
     border-color: transparent #f0ad4e transparent #f0ad4e;
   }
 
-  #folder .tag-danger{
+  .folder .tag-danger{
     border-color: transparent #d9534f transparent #d9534f;
   }
-  #content {
+  .content {
     margin-left: 330px;
   }
 }
 
-#folder > .content-success {
+.folder > .folder-content-success {
  background-color: #5cb85c;
 }
 
-#folder > .content-info {
+.folder > .folder-content-info {
  background-color: #5bc0de;
 }
 
-#folder > .content-warning {
+.folder > .folder-content-warning {
  background-color: #f0ad4e;
 }
 
-#folder > .content-danger {
+.folder > .folder-content-danger {
  background-color: #d9534f;
 }
 
- #content .paper{
+ .paper{
    padding: 80px 10px 80px 10px;
    background-color: rgba(255,255,255,0.2);
  }
 
- #content .paper .heading{
+ .paper .heading{
    height: 100px;
  }
 
- #content .paper .heading > .date{
+ .paper .heading > .date{
    width: 80px;
    height: 80px;
    float: left;
    padding: 10px;
  }
 
- #content .paper .heading > .date > table{
+ .paper .heading > .date > table{
    border: 1px solid;
    height: inherit;
    width: inherit;
  }
 
- #content .paper .heading > .date > table .date-tr-1 {
+ .paper .heading > .date > table .date-tr-1 {
    height: 10%;
  }
 
- #content .paper .heading > .date > table .date-tr-1 > td:first-child {
+ .paper .heading > .date > table .date-tr-1 > td:first-child {
    text-align: right;
    padding-right: 2px;
    font-family: 'monaco', serif;
  }
- #content .paper .heading > .date > table .date-tr-1 > td:last-child {
+ .paper .heading > .date > table .date-tr-1 > td:last-child {
    text-align: left;
    padding-left: 2px;
  }
 
- #content .paper .heading > .date > table .date-tr-2 > td {
+ .paper .heading > .date > table .date-tr-2 > td {
    font-size: 30pt;
    text-align: center;
    letter-spacing: 2px;
  }
 
- #content .paper .heading>.title{
+ .paper .heading > .title{
    line-height: 100px;
    font-family: 'Noto Sans TC Bold', serif;
    font-size: 26pt;
    padding-left: 100px;
  }
 
- #content .paper .text{
+ .paper .text{
    font-family: 'Noto Sans TC Thin', serif;
    font-size: medium;
    padding: 20px;
