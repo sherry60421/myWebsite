@@ -1,58 +1,4 @@
-@font-face {
-  font-family: 'Noto Sans TC Thin';
-  font-style: normal;
-  font-weight: 100;
-  src: url(../fonts/NotoSansTC-Thin.otf) format('opentype');
-}
-@font-face {
-  font-family: 'Noto Sans TC Light';
-  font-style: normal;
-  font-weight: 300;
-  src: url(../fonts/NotoSansTC-Light.otf) format('opentype');
-}
-@font-face {
-   font-family: 'Noto Sans TC Regular';
-   font-style: normal;
-   font-weight: 400;
-   src: url(../fonts/NotoSansTC-Regular.otf) format('opentype');
- }
-@font-face {
-   font-family: 'Noto Sans TC Medium';
-   font-style: normal;
-   font-weight: 500;
-   src: url(../fonts/NotoSansTC-Medium.otf) format('opentype');
- }
-@font-face {
-   font-family: 'Noto Sans TC Bold';
-   font-style: normal;
-   font-weight: 700;
-   src: url(../fonts/NotoSansTC-Bold.otf) format('opentype');
- }
-@font-face {
-   font-family: 'Noto Sans TC Black';
-   font-style: normal;
-   font-weight: 900;
-   src: url(../fonts/NotoSansTC-Black.otf) format('opentype');
- }
- @font-face {
-   font-family: 'monaco';
-   font-style: normal;
-   font-weight: 100;
-   src: url(../fonts/monaco.ttf) format('truetype');
-   src: url(../fonts/monaco.otf) format('opentype');
- }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  margin-bottom: 30px;
-  background-image: url("../image/text-background.png");
-  background-attachment: fixed;
-  color: white;
-  font-family: 'monaco', serif;
-}
 .footer {
   position: fixed;
   bottom: 0;
@@ -139,7 +85,6 @@ body > .container-fluid {
     height: 80px;
     text-align: center;
     margin-top: -4px;
-    font-family: 'Noto Sans TC Regular', serif;
     color: white;
     text-decoration: none;
     cursor: pointer;
@@ -210,7 +155,6 @@ body > .container-fluid {
  .paper .heading > .date > table .date-tr-1 > td:first-child {
    text-align: right;
    padding-right: 2px;
-   font-family: 'monaco', serif;
  }
  .paper .heading > .date > table .date-tr-1 > td:last-child {
    text-align: left;

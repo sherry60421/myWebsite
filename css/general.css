@@ -1,0 +1,85 @@
+
+/* no unicode-range; default to all characters */
+@font-face {
+  font-family: 'GeneralFont';
+  src: url(../fonts/NotoSansTC-Light.otf) format('opentype');
+}
+
+/* Latin characters 專用 */
+@font-face {
+  font-family: 'GeneralFont'; /* 同樣的 font-family */
+  unicode-range: U+00-024F, U+2022;  /* Latin, Latin1 Sup., Ext-A, Ext-B */
+  src: url(../fonts/monaco.ttf) format('truetype');
+  src: url(../fonts/monaco.otf) format('opentype');
+}
+
+/* 注音符號專用 */
+@font-face {
+  font-family: 'GeneralFont';      /* 同樣的 font-family */
+  unicode-range: U+3100-312F;     /* Bopomofo */
+  src: local(LiHei Pro),          /* OS X */
+       local("微軟正黑體"); /* Windows Vista+ */
+}
+
+/* 日文假名專用 */
+@font-face {
+  font-family: 'GeneralFont';            /* 同樣的 font-family */
+  unicode-range: U+3040-30FF;           /* Hiragana, Katakana */
+  src: local(Hiragino Kaku Gothic Pro), /* OS X */
+       local(Meiryo);                   /* Windows Vista+ */
+}
+
+@font-face {
+  font-family: 'Noto Sans TC Thin';
+  font-style: normal;
+  font-weight: 100;
+  src: url(../fonts/NotoSansTC-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans TC Light';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../fonts/NotoSansTC-Light.otf) format('opentype');
+}
+@font-face {
+   font-family: 'Noto Sans TC Regular';
+   font-style: normal;
+   font-weight: 400;
+   src: url(../fonts/NotoSansTC-Regular.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC Medium';
+   font-style: normal;
+   font-weight: 500;
+   src: url(../fonts/NotoSansTC-Medium.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC Bold';
+   font-style: normal;
+   font-weight: 700;
+   src: url(../fonts/NotoSansTC-Bold.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC Black';
+   font-style: normal;
+   font-weight: 900;
+   src: url(../fonts/NotoSansTC-Black.otf) format('opentype');
+ }
+ @font-face {
+   font-family: 'monaco';
+   font-style: normal;
+   font-weight: 100;
+   src: url(../fonts/monaco.ttf) format('truetype');
+   src: url(../fonts/monaco.otf) format('opentype');
+ }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  background-image: url("../image/text-background.png");
+  background-attachment: fixed;
+  color: white;
+  font-family: 'GeneralFont', sans-serif;
+}
