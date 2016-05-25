@@ -1,0 +1,24 @@
+.form-control{
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+}
+.note-editor.note-frame .note-editing-area .note-editable{
+  background-color: transparent;
+  color: white;
+}
+.panel{
+  background-color: rgba(255,255,255,0.2);
+}
+.bootstrap-tagsinput{
+  background-color: rgba(255,255,255,0.2);
+  border: 0;
+  color: white;
+  padding: 8px 12px;
+}
+h2{
+  font-family: 'Noto Sans TC Bold', serif;
+}
+select option {
+  background-color: rgba(0,0,0,0.8);
+  text-shadow:0 1px 0 rgba(0,0,0,0.4);
+}

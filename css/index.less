@@ -1,10 +1,10 @@
-
+﻿@import "variables.less";
 .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 30px;
-  background-color: #222;
+  background-color: @body-bg;
 }
 
 body > .container-fluid {
@@ -28,19 +28,19 @@ body > .container-fluid {
     cursor: pointer;
   }
   .folder .tag-success{
-    background-color: #5cb85c;
+    background-color: @brand-success;
   }
-
   .folder .tag-info{
-    background-color: #5bc0de;
+    background-color: @brand-info;
   }
-
   .folder .tag-warning{
-    background-color: #f0ad4e;
+    background-color: @brand-warning;
   }
-
   .folder .tag-danger{
-    background-color: #d9534f;
+    background-color: @brand-danger;
+  }
+  .folder .tag-primary{
+    background-color: @brand-primary;
   }
   .folder .tag > a {
     font-family: 'Noto Sans TC Regular', serif;
@@ -91,19 +91,19 @@ body > .container-fluid {
   }
 
   .folder .tag-success{
-    border-color: transparent #5cb85c transparent #5cb85c;
+    border-color: transparent @brand-success transparent @brand-success;
   }
-
   .folder .tag-info{
-    border-color: transparent #5bc0de transparent #5bc0de;
+    border-color: transparent @brand-info transparent @brand-info;
   }
-
   .folder .tag-warning{
-    border-color: transparent #f0ad4e transparent #f0ad4e;
+    border-color: transparent @brand-warning transparent @brand-warning;
   }
-
   .folder .tag-danger{
-    border-color: transparent #d9534f transparent #d9534f;
+    border-color: transparent @brand-danger transparent @brand-danger;
+  }
+  .folder .tag-primary{
+    border-color: transparent @brand-primary transparent @brand-primary;
   }
   .content {
     margin-left: 330px;
@@ -111,19 +111,19 @@ body > .container-fluid {
 }
 
 .folder > .folder-content-success {
- background-color: #5cb85c;
+ background-color: @brand-success;
 }
-
 .folder > .folder-content-info {
- background-color: #5bc0de;
+ background-color: @brand-info;
 }
-
 .folder > .folder-content-warning {
- background-color: #f0ad4e;
+ background-color: @brand-warning;
 }
-
 .folder > .folder-content-danger {
- background-color: #d9534f;
+ background-color: @brand-danger;
+}
+.folder > .folder-content-primary {
+ background-color: @brand-primary;
 }
 
  .paper{
@@ -146,6 +146,7 @@ body > .container-fluid {
    border: 1px solid;
    height: inherit;
    width: inherit;
+   background-color: transparent;
  }
 
  .paper .heading > .date > table .date-tr-1 {
