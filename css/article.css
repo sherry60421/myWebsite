@@ -14,6 +14,7 @@
   border: 0;
   color: white;
   padding: 8px 12px;
+  width: 100%;
 }
 h2{
   font-family: 'Noto Sans TC Bold', serif;
@@ -21,4 +22,17 @@ h2{
 select option {
   background-color: rgba(0,0,0,0.8);
   text-shadow:0 1px 0 rgba(0,0,0,0.4);
+}
+.newArticle-modal{
+  width: 90%;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+  font-family: 'GeneralFont', sans-serif;
+}
+.newArticle-content{
+  background-image: url("../image/text-background.png");
+}
+.warning-text{
+  color: red;
+  padding: 10px;
 }
