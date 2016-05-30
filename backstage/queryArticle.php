@@ -11,7 +11,10 @@ $stmt = $conn->prepare("SELECT `DESC` AS `CATEGORY`,
   `CONTENT`,
   `CREATE_DATE`,
   `PUBLISH_DATE`,
-  `IS_VISIBLE`
+  `IS_VISIBLE`,
+  `CATEGORY` AS `CATEGORY_NO`,
+  `ARTICLE`.`NO`,
+  `SUBNO`
   FROM `ARTICLE`, `CATEGORY` WHERE `ARTICLE`.`CATEGORY` = `CATEGORY`.`NO` ORDER BY `CREATE_DATE` DESC");
 echo $conn->error;
 
@@ -30,7 +33,10 @@ if($num_row > 0){
       'content' => $row['CONTENT'],
       'createDate' => $row['CREATE_DATE'],
       'publishDate' => $row['PUBLISH_DATE'],
-      'isVisible' => $row['IS_VISIBLE']
+      'isVisible' => $row['IS_VISIBLE'],
+      'categoryNo' => $row['CATEGORY_NO'],
+      'no' => $row['NO'],
+      'subNo' => $row['SUBNO']
       );
   }
 }

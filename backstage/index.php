@@ -50,7 +50,7 @@
       <div id="toolbar">
         <div class="form-inline">
           <div class="form-group">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#newArticle">新增文章</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#newArticle" insert>新增文章</button>
           </div>
         </div>
       </div>
@@ -62,21 +62,20 @@
                  data-toolbar="#toolbar"
                  data-show-refresh="true"
                  data-show-columns="true"
-                 data-query-params="queryParams"
-                 data-response-handler="responseHandler"
                  data-pagination="true"
+                 data-response-handler="responseHandler"
                  data-url="queryArticle.php">
               <thead>
               <tr>
                   <th data-field="category">分類</th>
-                  <th data-field="tags">標籤</th>
+                  <th data-field="tags" data-formatter="tagsFormatter">標籤</th>
                   <th data-field="mainTitle">主標題</th>
                   <th data-field="subTitle">次標題</th>
-                  <th data-field="content">內容</th>
+                  <th data-field="content" data-formatter="contentFormatter">內容</th>
                   <th data-field="createDate">建立日期</th>
                   <th data-field="publishDate">發佈日期</th>
-                  <th data-field="isVisible">是否發佈</th>
-                  <th data-field="">編輯</th>
+                  <th data-field="isVisible" data-formatter="isVisibleFormatter">是否發佈</th>
+                  <th data-formatter="editFormatter">編輯</th>
               </tr>
               </thead>
           </table>
@@ -91,7 +90,7 @@
           <div class="modal-content newArticle-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">請填入文章</h4>
+              <h4 class="modal-title" id="ArticleLabel">請填入文章</h4>
             </div>
             <div class="modal-body">
               <div class="container-fluid">
@@ -134,7 +133,7 @@
                             <input type="checkbox" name="isMultiple"> 是否多篇
                           </label>
                           <label style="display:none;">
-                            <input type="checkbox" name="isContinued" checked> 是否未完結
+                            <input type="checkbox" name="isContinued"> 是否未完結
                           </label>
                         </div>
                       </div>
@@ -192,9 +191,9 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="originUrl" class="col-md-1 control-label">回應位址</label>
+                        <label for="commentUrl" class="col-md-1 control-label">回應位址</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control" name="originUrl"></input>
+                          <input type="text" class="form-control" name="commentUrl"></input>
                         </div>
                         <div class="col-md-offset-1 col-md-4" style="text-align: right;">
                           <div class="checkbox">

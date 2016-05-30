@@ -2,7 +2,7 @@
 /* no unicode-range; default to all characters */
 @font-face {
   font-family: 'GeneralFont';
-  src: url(../fonts/NotoSansTC-Light.otf) format('opentype');
+  src: url(../fonts/NotoSansTC-Thin.otf) format('opentype');
 }
 
 /* Latin characters 專用 */
