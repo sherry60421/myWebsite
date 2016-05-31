@@ -205,12 +205,16 @@
                       </div>
                     </div>
                   </div>
+                  <!-- update時用,藏key -->
+                  <input type="hidden" name="oldCategory" value="">
+                  <input type="hidden" name="no" value="">
+                  <input type="hidden" name="subNo" value="">
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-warning" data-dismiss="modal">回前頁</button>
               <button type="reset" class="btn btn-danger">清除</button>
-              <button type="button" class="btn btn-primary">送出</button>
+              <button type="button" class="btn btn-primary" is-new-article=1>送出</button>
             </div>
           </div>
         </div>

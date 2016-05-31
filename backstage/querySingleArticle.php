@@ -4,7 +4,6 @@ session_start();
 require('general.php');
 header("Content-Type:application/json; charset=utf-8");
 
-$categoryNo = isset($_POST['categoryNo']) ? $_POST['categoryNo'] : '';
 $no = isset($_POST['no']) ? $_POST['no'] : '';
 $subNo = isset($_POST['subNo']) ? $_POST['subNo'] : '';
 
@@ -26,11 +25,10 @@ $stmt = $conn->prepare("SELECT `CATEGORY`,
   `SUBNO`
   FROM `ARTICLE`, `CATEGORY`
   WHERE `ARTICLE`.`CATEGORY` = `CATEGORY`.`NO`
-    AND `ARTICLE`.`CATEGORY` = ?
     AND `ARTICLE`.`NO` = ?
-    AND `SUBNO` = ?");
+    AND `SUBNO` = ? LIMIT 1");
 echo $conn->error;
-$stmt->bind_param("sss", $categoryNo, $no, $subNo);
+$stmt->bind_param("ss", $no, $subNo);
 $stmt->execute();
 $result = $stmt->get_result();
 $num_row = $result->num_rows;
