@@ -1,3 +1,32 @@
+/* no unicode-range; default to all characters */
+@font-face {
+  font-family: 'TitleFont';
+  src: url(../fonts/NotoSansTC-Bold.otf) format('opentype');
+}
+
+/* Latin characters 專用 */
+@font-face {
+  font-family: 'TitleFont'; /* 同樣的 font-family */
+  unicode-range: U+00-024F, U+2022;  /* Latin, Latin1 Sup., Ext-A, Ext-B */
+  src: url(../fonts/monaco.ttf) format('truetype');
+  src: url(../fonts/monaco.otf) format('opentype');
+}
+
+/* 注音符號專用 */
+@font-face {
+  font-family: 'TitleFont';      /* 同樣的 font-family */
+  unicode-range: U+3100-312F;     /* Bopomofo */
+  src: local(LiHei Pro),          /* OS X */
+       local("微軟正黑體"); /* Windows Vista+ */
+}
+
+/* 日文假名專用 */
+@font-face {
+  font-family: 'TitleFont';            /* 同樣的 font-family */
+  unicode-range: U+3040-30FF;           /* Hiragana, Katakana */
+  src: local(Hiragino Kaku Gothic Pro), /* OS X */
+       local(Meiryo);                   /* Windows Vista+ */
+}
 
 /* no unicode-range; default to all characters */
 @font-face {

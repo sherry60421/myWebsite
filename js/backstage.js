@@ -161,12 +161,10 @@ $("button[is-new-article]").click(function(){
       data: getAllFieldValue(),
       dataType: "text",
       success: function(data, textStatus, jqXHR){
-        if(data === "success"){
+        if(data === "success")
           $("<small class='success-text'>新增成功！</small>").insertBefore($($btn.closest("div").find("button")[0]));
-        }
-        else{
+        else
           $("<small class='warning-text'>新增失敗！</small>").insertBefore($($btn.closest("div").find("button")[0]));
-        }
       },
       fail: function(jqXHR, textStatus, errorThrown){
         console.log(errorThrown);
@@ -181,12 +179,10 @@ $("button[is-new-article]").click(function(){
       data: getAllFieldValue(),
       dataType: "text",
       success: function(data, textStatus, jqXHR){
-        if(data === "success"){
+        if(data === "success")
           $("<small class='success-text'>修改成功！</small>").insertBefore($($btn.closest("div").find("button")[0]));
-        }
-        else{
-          $("<small class='warning-text'>修改失敗！</small>").insertBefore($($btn.closest("div").find("button")[0]));
-        }
+        else
+          $("<small class='warning-text'>修改失敗！</small>").insertBefore($($btn.closest("div").find("button")[0]));d
       },
       fail: function(jqXHR, textStatus, errorThrown){
         console.log(errorThrown);
@@ -221,6 +217,7 @@ function getAllFieldValue(){
 // 關閉modal時刪掉提示訊息
 $("#newArticle").on('hidden.bs.modal', function () {
   $($(this).closest("div").find("small")[0]).remove();
+  $table.bootstrapTable('refresh');
 });
 
 //開啟modal時
@@ -238,6 +235,12 @@ $("#newArticle").on('show.bs.modal', function(){
     format: 'YYYY-MM-DD HH:mm:ss',
     defaultDate: moment().format('YYYY-MM-DD HH:mm:ss')
   });
+});
+
+// button複製
+$("button.copy").click(function(){
+  var inputs = $(this).closest("div.form-group").find("input");
+  $(inputs[1]).val($(inputs[0]).val());
 });
 
 // summernote

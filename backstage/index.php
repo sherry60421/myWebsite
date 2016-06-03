@@ -117,7 +117,7 @@
                           <input type="text" class="form-control" name="mainTitle">
                         </div>
                         <div class="col-md-1" style="text-align: right;">
-                          <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                          <button type="button" class="btn btn-success copy"><span class="glyphicon glyphicon-arrow-right"></span></button>
                         </div>
                         <label for="mainTitleMenu" class="control-label col-md-1">MENU</label>
                         <div class="col-md-4">
@@ -148,7 +148,7 @@
                           <input type="text" class="form-control" name="subTitle">
                         </div>
                         <div class="col-md-1" style="text-align: right;">
-                          <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                          <button type="button" class="btn btn-success copy"><span class="glyphicon glyphicon-arrow-right"></span></button>
                         </div>
                         <label for="subTitleMenu" class="control-label col-md-1">MENU</label>
                         <div class="col-md-4">
@@ -165,7 +165,7 @@
                           <input type="text" class="form-control" name="createDate"></input>
                         </div>
                         <div class="col-md-1" style="text-align: right;">
-                          <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                          <button type="button" class="btn btn-success copy"><span class="glyphicon glyphicon-arrow-right"></span></button>
                         </div>
                         <label for="mainTitleMenu" class="control-label col-md-1">發佈日期</label>
                         <div class="col-md-4">
