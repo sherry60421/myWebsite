@@ -9,16 +9,14 @@ $stmt = $conn->prepare("SELECT DISTINCT `NO`,`DESC` FROM `CATEGORY`");
 echo $conn->error;
 
 $stmt->execute();
-$result = $stmt->get_result();
-$row = $result->num_rows;
+$stmt->bind_result($no, $desc);
 
 $return = array();
 
-if($row > 0){
-  while($row = $result->fetch_array(MYSQLI_ASSOC)){
-      $return[] = array('no' => $row['NO'], 'desc' => $row['DESC']);
-  }
+while($stmt->fetch()){
+    $return[] = array('no' => $no, 'desc' => $desc);
 }
+
 
 $conn->close();
 echo json_encode($return);

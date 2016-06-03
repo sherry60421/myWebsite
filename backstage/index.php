@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,7 +39,6 @@
 
   <body>
     <?php
-    session_start();
     if(isset($_SESSION['username'])) :
     ?>
     <div class="container-fluid">
@@ -75,6 +75,7 @@
                   <th data-field="createDate">建立日期</th>
                   <th data-field="publishDate">發佈日期</th>
                   <th data-field="isVisible" data-formatter="isVisibleFormatter">是否發佈</th>
+                  <th data-field="hits">點擊數</th>
                   <th data-formatter="editFormatter">編輯</th>
               </tr>
               </thead>

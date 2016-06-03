@@ -2,12 +2,12 @@
 
 header("Content-Type:text/html; charset=utf-8");
 
-$host = 'localhost';
-$dbUsername = 'u439059547_admin';
-$dbPassword = 'MxxBDNqJPv';
-$dbName = 'u439059547_myweb';
+$host = 'localhost'; // fdb15.biz.nf
+$dbUsername = '2141104_myweb';
+$dbPassword = 'MxxBDNqJPv0626';
+$dbName = '2141104_myweb';
 
 $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
 $conn->set_charset("utf8");
-
+echo $conn->error;
 ?>

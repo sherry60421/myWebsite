@@ -12,15 +12,16 @@ echo $conn->error;
 $stmt->bind_param("s", $username);
 
 $stmt->execute();
-$result = $stmt->get_result();
-$row = $result->num_rows;
+$stmt->store_result();
+$row = $stmt->num_rows;
 
 $return = array('errorTag' => '*', 'message' => '');
 
 // 有此帳號
 if($row > 0){
-  while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    if($password === $row['PASSWORD']){
+  $stmt->bind_result($f1_username, $f2_password);
+  while($stmt->fetch()){
+    if($password === $f2_password){
       $return['errorTag'] = '';
       $_SESSION['username'] = $username;
     }

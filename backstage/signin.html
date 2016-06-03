@@ -69,7 +69,7 @@ $("button[type='submit']").click(function(e){
     success: function(data, textStatus, jqXHR){
       if(data.errorTag === ""){
         $($("form").find("span")).css("color", "lightgreen").text("登入成功，轉向中...");
-        setTimeout(function(){window.location = "../index.html"}, 2000);
+        setTimeout(function(){window.location = "./index.php"}, 2000);
       }
       else{
         $($("form").find("span")).css("color", "red").text(data.message);

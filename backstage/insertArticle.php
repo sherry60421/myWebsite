@@ -4,7 +4,10 @@ session_start();
 require('general.php');
 header("Content-Type:application/json; charset=utf-8");
 
-$category = isset($_POST['category']) ? intVal($_POST['category']) : 99;
+$no = isset($_POST['no']) ? intVal($_POST['no']) : '';
+$subNo = isset($_POST['subNo']) ? intVal($_POST['subNo']) : '';
+
+$category = isset($_POST['category']) ? intVal($_POST['category']) : 0;
 $tags = isset($_POST['tags']) ? $_POST['tags'] : '';
 $mainTitle = isset($_POST['mainTitle']) ? $_POST['mainTitle'] : '';
 $subTitle = isset($_POST['subTitle']) ? $_POST['subTitle'] : '';
@@ -24,22 +27,22 @@ $stmt = $conn->prepare("SELECT `NO`, `SUBNO` FROM `ARTICLE` WHERE `MAIN_TITLE` =
 echo $conn->error;
 $stmt->bind_param("s", $mainTitle);
 $stmt->execute();
-$result = $stmt->get_result();
-$row = $result->num_rows;
+$stmt->store_result();
+$row = $stmt->num_rows;
+$stmt->bind_result($speficNo, $maxSubNo);
 if($row > 0){
-  while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    $no = intVal($row['NO']);
-    $subNo = intVal($row['SUBNO']) + 1;
+  while($stmt->fetch()){
+    $no = intVal($speficNo);
+    $subNo = intVal($maxSubNo) + 1;
   }
 }
 else{
   $stmt = $conn->prepare("SELECT `NO` FROM `ARTICLE` ORDER BY `NO` DESC LIMIT 1");
   echo $conn->error;
   $stmt->execute();
-  $result = $stmt->get_result();
-  $row = $result->num_rows;
-  while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    $no = intVal($row['NO']) + 1;
+  $stmt->store_result($maxNo);
+  while($stmt->fetch()){
+    $no = intVal($maxNo) + 1;
     $subNo = 1;
   }
 }

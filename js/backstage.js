@@ -35,6 +35,8 @@ function contentFormatter(value, row, index){
 function isVisibleFormatter(value, row, index){
   if(value === 0)
     return "<span style='color: red;'>未發佈</span>";
+  else if(value === 1 && row.publishDate > moment().format('YYYY-MM-DD HH:mm:ss'))
+    return "<span style='color: cornflowerblue;'>自動發佈</span>";
   else if(value === 1)
     return "<span style='color: lightgreen;'>已發佈</span>";
   return value;
@@ -173,7 +175,23 @@ $("button[is-new-article]").click(function(){
   }
   //是修改
   else{
-    $("<small class='warning-text'>修改失敗！</small>").insertBefore($($btn.closest("div").find("button")[0]));
+    $.ajax({
+      url: "updateArticle.php",
+      method: "post",
+      data: getAllFieldValue(),
+      dataType: "text",
+      success: function(data, textStatus, jqXHR){
+        if(data === "success"){
+          $("<small class='success-text'>修改成功！</small>").insertBefore($($btn.closest("div").find("button")[0]));
+        }
+        else{
+          $("<small class='warning-text'>修改失敗！</small>").insertBefore($($btn.closest("div").find("button")[0]));
+        }
+      },
+      fail: function(jqXHR, textStatus, errorThrown){
+        console.log(errorThrown);
+      }
+    });
   }
 });
 

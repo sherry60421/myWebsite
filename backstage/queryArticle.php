@@ -12,33 +12,33 @@ $stmt = $conn->prepare("SELECT `DESC` AS `CATEGORY`,
   `CREATE_DATE`,
   `PUBLISH_DATE`,
   `IS_VISIBLE`,
-  `CATEGORY` AS `CATEGORY_NO`,
   `ARTICLE`.`NO`,
-  `SUBNO`
+  `SUBNO`,
+  `HITS`
   FROM `ARTICLE`, `CATEGORY` WHERE `ARTICLE`.`CATEGORY` = `CATEGORY`.`NO` ORDER BY `CREATE_DATE` DESC");
 echo $conn->error;
 
 $stmt->execute();
-$result = $stmt->get_result();
-$num_row = $result->num_rows;
+$stmt->store_result();
+$num_row = $stmt->num_rows;
+$stmt->bind_result($category, $tags, $mainTitle, $subTitle, $content, $createDate,
+$publishDate, $isVisible, $no, $subNo, $hits);
 
 $rows = array();
 
-if($num_row > 0){
-  while($row = $result->fetch_array(MYSQLI_ASSOC)){
-      $rows[] = array('category' => $row['CATEGORY'],
-      'tags' => $row['TAGS'],
-      'mainTitle' => $row['MAIN_TITLE'],
-      'subTitle' => $row['SUB_TITLE'],
-      'content' => $row['CONTENT'],
-      'createDate' => $row['CREATE_DATE'],
-      'publishDate' => $row['PUBLISH_DATE'],
-      'isVisible' => $row['IS_VISIBLE'],
-      'categoryNo' => $row['CATEGORY_NO'],
-      'no' => $row['NO'],
-      'subNo' => $row['SUBNO']
-      );
-  }
+while($stmt->fetch()){
+    $rows[] = array('category' => $category,
+    'tags' => $tags,
+    'mainTitle' => $mainTitle,
+    'subTitle' => $subTitle,
+    'content' => $content,
+    'createDate' => $createDate,
+    'publishDate' => $publishDate,
+    'isVisible' => $isVisible,
+    'no' => $no,
+    'subNo' => $subNo,
+    'hits' => $hits
+    );
 }
 $return = array('total' => $num_row, 'rows' => $rows);
 $conn->close();

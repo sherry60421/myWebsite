@@ -4,8 +4,8 @@ session_start();
 require('general.php');
 header("Content-Type:application/json; charset=utf-8");
 
-$no = isset($_POST['no']) ? $_POST['no'] : '';
-$subNo = isset($_POST['subNo']) ? $_POST['subNo'] : '';
+$no = isset($_POST['no']) ? intVal($_POST['no']) : 0;
+$subNo = isset($_POST['subNo']) ? intVal($_POST['subNo']) : 0;
 
 $stmt = $conn->prepare("SELECT `CATEGORY`,
   `TAGS`,
@@ -28,31 +28,29 @@ $stmt = $conn->prepare("SELECT `CATEGORY`,
     AND `ARTICLE`.`NO` = ?
     AND `SUBNO` = ? LIMIT 1");
 echo $conn->error;
-$stmt->bind_param("ss", $no, $subNo);
+$stmt->bind_param("ii", $no, $subNo);
 $stmt->execute();
-$result = $stmt->get_result();
-$num_row = $result->num_rows;
+$stmt->bind_result($category, $tags, $mainTitle, $mainTitleMenu, $subTitle, $subTitleMenu, $isMultiple, $isContinued,
+$createDate, $publishDate, $content, $commentUrl, $originUrl, $isVisible, $no, $subNo);
 
-if($num_row > 0){
-  while($row = $result->fetch_array(MYSQLI_ASSOC)){
-      $return = array('category' => $row['CATEGORY'],
-      'tags' => $row['TAGS'],
-      'mainTitle' => $row['MAIN_TITLE'],
-      'subTitle' => $row['SUB_TITLE'],
-      'mainTitleMenu' => $row['MAIN_TITLE_MENU'],
-      'subTitleMenu' => $row['SUB_TITLE_MENU'],
-      'isMultiple' => $row['IS_MULTIPLE'],
-      'isContinued' => $row['IS_CONTINUED'],
-      'content' => $row['CONTENT'],
-      'createDate' => $row['CREATE_DATE'],
-      'publishDate' => $row['PUBLISH_DATE'],
-      'isVisible' => $row['IS_VISIBLE'],
-      'commentUrl' => $row['COMMENT_URL'],
-      'originUrl' => $row['ORIGIN_URL'],
-      'no' => $row['NO'],
-      'subNo' => $row['SUBNO']
-      );
-  }
+while($stmt->fetch()){
+    $return = array('category' => $category,
+    'tags' => $tags,
+    'mainTitle' => $mainTitle,
+    'subTitle' => $subTitle,
+    'mainTitleMenu' => $mainTitleMenu,
+    'subTitleMenu' => $subTitleMenu,
+    'isMultiple' => $isMultiple,
+    'isContinued' => $isContinued,
+    'content' => $content,
+    'createDate' => $createDate,
+    'publishDate' => $publishDate,
+    'isVisible' => $isVisible,
+    'commentUrl' => $commentUrl,
+    'originUrl' => $originUrl,
+    'no' => $no,
+    'subNo' => $subNo
+    );
 }
 $conn->close();
 echo json_encode($return);
