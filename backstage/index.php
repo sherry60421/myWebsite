@@ -176,7 +176,14 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <div id="summernote"></div>
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#article-content-editor">內容</a></li>
+                        <li><a data-toggle="tab" href="#article-memo-editor">後記</a></li>
+                      </ul>
+                      <div class="tab-content">
+                        <div id="article-content"></div>
+                        <div id="article-memo"></div>
+                      </div>
                     </div>
                   </div>
                   <div class="row">

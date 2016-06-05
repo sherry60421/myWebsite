@@ -14,6 +14,7 @@ $subTitle = isset($_POST['subTitle']) ? $_POST['subTitle'] : '';
 $mainTitleMenu = isset($_POST['mainTitleMenu']) ? $_POST['mainTitleMenu'] : '';
 $subTitleMenu = isset($_POST['subTitleMenu']) ? $_POST['subTitleMenu'] : '';
 $content = isset($_POST['content']) ? $_POST['content'] : '';
+$memo = isset($_POST['memo']) ? $_POST['memo'] : '';
 $createDate = isset($_POST['createDate']) ? $_POST['createDate'] : '';
 $publishDate = isset($_POST['publishDate']) ? $_POST['publishDate'] : '';
 $isVisible = isset($_POST['isVisible']) ? intVal($_POST['isVisible']) : 0;
@@ -56,11 +57,12 @@ $stmt = $conn->prepare("UPDATE `ARTICLE` SET
   `IS_MULTIPLE` = ?,
   `IS_CONTINUED` = ?,
   `COMMENT_URL` = ?,
-  `ORIGIN_URL` = ?
+  `ORIGIN_URL` = ?,
+  `MEMO` = ?
  WHERE `NO` = ? AND `SUBNO` = ?");
 echo $conn->error;
-$stmt->bind_param("ssssssssssssssii", $category, $tags, $mainTitle, $mainTitleMenu, $subTitle, $subTitleMenu,
-  $content, $createDate, $publishDate, $isVisible, $isMultiple, $isContinued, $commentUrl, $originUrl, $no, $subNo);
+$stmt->bind_param("sssssssssssssssii", $category, $tags, $mainTitle, $mainTitleMenu, $subTitle, $subTitleMenu,
+  $content, $createDate, $publishDate, $isVisible, $isMultiple, $isContinued, $commentUrl, $originUrl, $memo, $no, $subNo);
 $stmt->execute();
 
 $conn->close();

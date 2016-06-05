@@ -95,7 +95,8 @@ function putArticleAttribute(data, opt){
     $("[name='subTitleMenu']").val("");
     $("[name='createDate']").val("");
     $("[name='publishDate']").val("");
-    $("#summernote").summernote("code", "");
+    $("#article-content").summernote("code", "");
+    $("#article-memo").summernote("code", "");
     $("[name='originUrl']").val("");
     $("[name='commentUrl']").val("");
     $("[name='isVisible']").prop("checked", false);
@@ -134,7 +135,8 @@ function putArticleAttribute(data, opt){
     $("[name='subTitleMenu']").val(data.subTitleMenu);
     $("[name='createDate']").val(data.createDate);
     $("[name='publishDate']").val(data.publishDate);
-    $("#summernote").summernote("code", data.content);
+    $("#article-content").summernote("code", data.content);
+    $("#article-memo").summernote("code", data.memo);
     $("[name='originUrl']").val(data.originUrl);
     $("[name='commentUrl']").val(data.commentUrl);
     if(data.isVisible === 1)
@@ -147,6 +149,16 @@ function putArticleAttribute(data, opt){
     $($(".modal-footer").find("button[is-new-article]")[0]).attr("is-new-article", 0);
   }
 }
+
+// tab切換
+$('#article-content').on('summernote.init', function() {
+  $(this).next(".note-editor").attr("id", "article-content-editor");
+  $(this).next(".note-editor").addClass("tab-pane fade in active");
+});
+$('#article-memo').on('summernote.init', function() {
+  $(this).next(".note-editor").attr("id", "article-memo-editor");
+  $(this).next(".note-editor").addClass("tab-pane fade");
+});
 
 // 送出文章
 $("button[is-new-article]").click(function(){
@@ -206,7 +218,8 @@ function getAllFieldValue(){
     "subTitleMenu" : $("[name='subTitleMenu']").val(),
     "createDate" : $("[name='createDate']").val(),
     "publishDate" : $("[name='publishDate']").val(),
-    "content" : $("#summernote").summernote("code"),
+    "content" : $("#article-content").summernote("code"),
+    "memo" : $("#article-memo").summernote("code"),
     "originUrl" : $("[name='originUrl']").val(),
     "commentUrl" : $("[name='commentUrl']").val(),
     "isVisible" : $("[name='isVisible']").prop("checked") ? "1" : "0"
@@ -244,7 +257,7 @@ $("button.copy").click(function(){
 });
 
 // summernote
-$("#summernote").summernote({
+$("#article-content").summernote({
   lang: "zh-TW",
   height: 500,
   toolbar: [
@@ -254,7 +267,19 @@ $("#summernote").summernote({
     ["para", ["style", "ul", "ol", "paragraph", "height"]],
     ["misc",["codeview", "undo", "redo", "help"]]
   ],
-  placeholder: "測試中，插入影片和圖片先不要用喔~~"
+  placeholder: "輸入內容"
+});
+$("#article-memo").summernote({
+  lang: "zh-TW",
+  height: 300,
+  toolbar: [
+    ["style", ["bold", "italic", "underline", "strikethrough", "clear"]],
+    ["font", ["superscript", "subscript","fontsize","color"]],
+    ["insert", ["link", "table", "hr", "picture", "video"]],
+    ["para", ["style", "ul", "ol", "paragraph", "height"]],
+    ["misc",["codeview", "undo", "redo", "help"]]
+  ],
+  placeholder: "輸入後記"
 });
 
 // 多篇控制項
@@ -288,7 +313,8 @@ $("button[type='reset']").click(function(e){
   }
   else{
     // 補清除
-    $("#summernote").summernote("code", "");
+    $("#article-content").summernote("code", "");
+    $("#article-memo").summernote("code", "");
     $("[name='tags']").tagsinput('removeAll');
   }
   isClickReset = !isClickReset;

@@ -21,6 +21,7 @@ $stmt = $conn->prepare("SELECT `CATEGORY`,
   `COMMENT_URL`,
   `ORIGIN_URL`,
   `IS_VISIBLE`,
+  `MEMO`,
   `ARTICLE`.`NO`,
   `SUBNO`
   FROM `ARTICLE`, `CATEGORY`
@@ -31,7 +32,7 @@ echo $conn->error;
 $stmt->bind_param("ii", $no, $subNo);
 $stmt->execute();
 $stmt->bind_result($category, $tags, $mainTitle, $mainTitleMenu, $subTitle, $subTitleMenu, $isMultiple, $isContinued,
-$createDate, $publishDate, $content, $commentUrl, $originUrl, $isVisible, $no, $subNo);
+$createDate, $publishDate, $content, $commentUrl, $originUrl, $isVisible, $memo, $no, $subNo);
 
 while($stmt->fetch()){
     $return = array('category' => $category,
@@ -48,6 +49,7 @@ while($stmt->fetch()){
     'isVisible' => $isVisible,
     'commentUrl' => $commentUrl,
     'originUrl' => $originUrl,
+    'memo' => $memo,
     'no' => $no,
     'subNo' => $subNo
     );
