@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 require('general.php');
 header("Content-Type:application/json; charset=utf-8");
@@ -30,8 +29,8 @@ $stmt->bind_param("s", $mainTitle);
 $stmt->execute();
 $stmt->store_result();
 $row = $stmt->num_rows;
-$stmt->bind_result($speficNo, $maxSubNo);
 if($row > 0){
+  $stmt->bind_result($speficNo, $maxSubNo);
   while($stmt->fetch()){
     $no = intVal($speficNo);
     $subNo = intVal($maxSubNo) + 1;
@@ -41,7 +40,9 @@ else{
   $stmt = $conn->prepare("SELECT `NO` FROM `ARTICLE` ORDER BY `NO` DESC LIMIT 1");
   echo $conn->error;
   $stmt->execute();
-  $stmt->store_result($maxNo);
+  $stmt->store_result();
+  $row = $stmt->num_rows;
+  $stmt->bind_result($maxNo);
   while($stmt->fetch()){
     $no = intVal($maxNo) + 1;
     $subNo = 1;

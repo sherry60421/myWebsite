@@ -106,10 +106,10 @@ function putArticleAttribute(data, opt){
     $("#ArticleLabel").text("請修改文章");
     var categoryOptions = $("select[name='category']").find("option");
     for(i=0; i<categoryOptions.length; i++){
-      if($(categoryOptions[i]).val() === data.category)
+      if(Number($(categoryOptions[i]).val()) === data.category)
         $(categoryOptions[i]).prop("selected", true);
     }
-    var result = "";
+    $("[name='tags']").tagsinput('removeAll');
     if(data.tags.indexOf(",") > 0){
       var array = data.tags.split(",");
       for(i=0; i<array.length; i++){
@@ -194,7 +194,7 @@ $("button[is-new-article]").click(function(){
         if(data === "success")
           $("<small class='success-text'>修改成功！</small>").insertBefore($($btn.closest("div").find("button")[0]));
         else
-          $("<small class='warning-text'>修改失敗！</small>").insertBefore($($btn.closest("div").find("button")[0]));d
+          $("<small class='warning-text'>修改失敗！</small>").insertBefore($($btn.closest("div").find("button")[0]));
       },
       fail: function(jqXHR, textStatus, errorThrown){
         console.log(errorThrown);

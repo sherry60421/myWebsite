@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 require('general.php');
 header("Content-Type:application/json; charset=utf-8");
