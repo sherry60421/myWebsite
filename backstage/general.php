@@ -2,7 +2,7 @@
 
 header("Content-Type:text/html; charset=utf-8");
 
-$host = 'localhost'; // fdb15.biz.nf
+$host = 'fdb15.biz.nf'; // fdb15.biz.nf
 $dbUsername = '2141104_myweb';
 $dbPassword = 'MxxBDNqJPv0626';
 $dbName = '2141104_myweb';

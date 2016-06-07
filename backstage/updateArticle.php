@@ -33,7 +33,7 @@ while($stmt->fetch()){
 }
 // 進入article_footprint
 if($content != $oldContent){
-  $stmt = $conn->prepare("INSERT INTO `ARTICLE_FOOTPOINT`(
+  $stmt = $conn->prepare("INSERT INTO `ARTICLE_FOOTPRINT`(
     `NO`,
     `SUBNO`,
     `UPDATE_TIME`,
