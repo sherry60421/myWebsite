@@ -2,10 +2,10 @@
 
 header("Content-Type:text/html; charset=utf-8");
 
-$host = 'localhost'; // fdb15.biz.nf
-$dbUsername = '2141104_myweb';
-$dbPassword = 'MxxBDNqJPv0626';
-$dbName = '2141104_myweb';
+$host = 'localhost';
+$dbUsername = 'adminCMBRcMd'; // 2141104_myweb / adminCMBRcMd
+$dbPassword = 'yk819N-UCj3x'; // MxxBDNqJPv0626 / yk819N-UCj3x
+$dbName = 'myweb'; // 2141104_myweb / myweb
 
 $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
 $conn->set_charset("utf8");
