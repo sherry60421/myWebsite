@@ -29,6 +29,7 @@ body > .container-fluid {
     cursor: pointer;
     text-align: center;
     width: 20%;
+    border-radius: 5px 5px 0px 0px;
   }
   .folder .tag-success{
     background-color: @brand-success;
@@ -53,21 +54,38 @@ body > .container-fluid {
   }
   .folder .tags{
     width: 90%;
-    position: absolute;
+    position: fixed;
     display: inline;
     display: -webkit-inline-box;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 3%;
+    z-index: 100;
+    top: 71px;
+    left: -93%;
   }
+
+  .folder > .mobile-bar{
+    position: fixed;
+    width: 20px;
+    left: 0%;
+    top: 92px;
+    height: 200px;
+    z-index: 100;
+    text-align: center;
+    line-height: 200px;
+    border-radius: 0px 25px 25px 0px;
+    opacity: 0.5;
+  }
+
   .folder > .folder-content {
-    position: absolute;
+    position: fixed;
     width: 90%;
-    top: 22px;
-    height: 100px;
+    top: 92px;
+    height: 200px;
     overflow-y: auto;
-    margin-left: 15px;
-    margin-right: 15px;
     padding-left: 5px;
+    z-index: 100;
+    margin-left: 3%;
+    left: -93%;
   }
   .folder .content{
     float: right;
@@ -105,10 +123,10 @@ body > .container-fluid {
 
   .content{
     position: absolute;
-    top: 200px;
     width: 100%;
   }
   .paper{
+    padding: 20px 0px 100px 0px;
     background-color: rgba(255,255,255,0.2);
     word-break: break-all;
   }
@@ -158,24 +176,39 @@ body > .container-fluid {
     display: table-cell;
     vertical-align: middle;
   }
-
+  .folder > .folder-content-success {
+   background-color: @brand-success;
+  }
+  .folder > .folder-content-info {
+   background-color: @brand-info;
+  }
+  .folder > .folder-content-warning {
+   background-color: @brand-warning;
+  }
+  .folder > .folder-content-danger {
+   background-color: @brand-danger;
+  }
+  .folder > .folder-content-primary {
+   background-color: @brand-primary;
+  }
 }
 
 @media (min-width: 768px){
- .folder {
-   float: left;
-   position: fixed;
- }
- .folder > .folder-content {
-  width: 280px;
-  height: 100%;
-  position: fixed;
-  padding: 10px;
-  padding-top: 20px;
-  word-break: break-all;
-
- }
-
+   .folder {
+     float: left;
+     position: fixed;
+   }
+   .folder > .folder-content {
+    width: 280px;
+    height: 100%;
+    position: fixed;
+    padding: 10px;
+    padding-top: 20px;
+    word-break: break-all;
+   }
+   .folder > .mobile-bar{
+     display: none;
+   }
   .folder .tag{
     margin-left: 280px;
     width: 0px;
@@ -300,23 +333,21 @@ body > .container-fluid {
     display: table-cell;
     vertical-align: middle;
   }
-
-}
-
-.folder > .folder-content-success {
- background-color: @brand-success;
-}
-.folder > .folder-content-info {
- background-color: @brand-info;
-}
-.folder > .folder-content-warning {
- background-color: @brand-warning;
-}
-.folder > .folder-content-danger {
- background-color: @brand-danger;
-}
-.folder > .folder-content-primary {
- background-color: @brand-primary;
+  .folder > .folder-content-success {
+   background-color: @brand-success;
+  }
+  .folder > .folder-content-info {
+   background-color: @brand-info;
+  }
+  .folder > .folder-content-warning {
+   background-color: @brand-warning;
+  }
+  .folder > .folder-content-danger {
+   background-color: @brand-danger;
+  }
+  .folder > .folder-content-primary {
+   background-color: @brand-primary;
+  }
 }
 
  .paper .text{

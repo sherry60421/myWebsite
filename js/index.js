@@ -1,4 +1,5 @@
 var tagOrder = ['tag-primary', 'tag-success', 'tag-warning', 'tag-danger'];
+var isOpenMenu = false;// for mobile
 // 抓現有的category建立folder tag(待加文章!!!)
 $.ajax({
   url: "backstage/selectMenu.php",
@@ -10,6 +11,7 @@ $.ajax({
     if(categoryArr.length == 0){
       return;
     }
+    $("<div class='mobile-bar tag-primary'><span class='glyphicon glyphicon-menu-right'></span></div>").appendTo($div);
     $("<div class='folder-content folder-content-primary'></div>").appendTo($div);
     $("<div class='tags'></div>").appendTo($div);
     for(i=0; i<categoryArr.length; i++){
@@ -33,7 +35,31 @@ $.ajax({
         if(tag_class.indexOf(tagOrder[i]) !== -1){
           $(".folder>.folder-content").removeClass("folder-content-success folder-content-warning folder-content-danger folder-content-primary");
           $(".folder>.folder-content").addClass(tagOrder[i].replace("tag", "folder-content"));
+          $(".folder>.mobile-bar").removeClass("tag-primary tag-success tag-warning tag-danger");
+          $(".folder>.mobile-bar").addClass(tagOrder[i]);
         }
+      }
+    });
+    //mobile-bar
+    $(".mobile-bar").click(function(){
+      if($(".folder > .mobile-bar").is(":hidden")){
+        return;
+      }
+      isOpenMenu = !isOpenMenu;
+      $($(".folder > .mobile-bar").find("span")[0]).removeClass("glyphicon-menu-right glyphicon-menu-left");
+      // 是要開啟
+      if(isOpenMenu){
+        $(".folder > .folder-content").animate({"left": "0%"}, 500);
+        $(".folder > .mobile-bar").animate({"opacity" : 1, "left": "93%"}, 500);
+        $(".folder .tags").animate({"left": "0%"}, 500);
+        $($(".folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-left");
+      }
+      // 還是關上呢
+      else{
+        $(".folder > .folder-content").animate({"left": "-93%"}, 500);
+        $(".folder > .mobile-bar").animate({"opacity" : 0.5, "left": "0%"}, 500);
+        $(".folder .tags").animate({"left": "-93%"}, 500);
+        $($(".folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-right");
       }
     });
   },
@@ -144,7 +170,7 @@ function registerMenuLink(){
     var no = Number($(this).attr("data-no"));
     var subNo = Number($(this).attr("data-subno"));
     $.ajax({
-      url: "backstage/querySingleArticle.php",
+      url: "backstage/querySingleArticle_front.php",
       method: "post",
       data: { "no" : no, "subNo" : subNo },
       dataType: "json",
