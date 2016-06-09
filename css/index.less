@@ -201,12 +201,14 @@ body > .container-fluid {
    }
    .folder > .folder-content {
     width: 280px;
-    height: 100%;
+    height: 92%;
     position: fixed;
     padding: 10px;
     padding-top: 20px;
     word-break: break-all;
+    overflow-y: auto;
    }
+
    .folder > .mobile-bar{
      display: none;
    }
@@ -279,6 +281,20 @@ body > .container-fluid {
     cursor: pointer;
   }
 
+  .folder > .folder-content::-webkit-scrollbar {
+     width: 10px;
+   }
+   .folder > .folder-content::-webkit-scrollbar-track {
+     background-color: transparent;
+   }
+   .folder > .folder-content::-webkit-scrollbar-thumb {
+     background-color: rgba(255, 255, 255, 0.3);
+     border-radius: 5px 5px 5px 5px;
+   }
+   .folder > .folder-content::-webkit-scrollbar-thumb:hover {
+     background-color: rgba(255, 255, 255, 0.5);
+   }
+
   .content {
     margin-left: 330px;
   }
@@ -349,6 +365,9 @@ body > .container-fluid {
   .folder > .folder-content-primary {
    background-color: @brand-primary;
   }
+  .paper .text{
+    text-indent: 32px;
+  }
 }
 
  .paper .text{
@@ -361,6 +380,8 @@ body > .container-fluid {
    padding: 10px;
    text-align: right;
  }
+
+
  .paper .memo > a, .paper .memo > a:hover, .paper .memo > a:focus,
  .paper .comment > a, .paper .comment > a:hover, .paper .comment > a:focus,{
    color: @gray-lighter;
@@ -370,6 +391,12 @@ body > .container-fluid {
  .paper #memo > pre{
    font-family: 'GeneralFont', sans-serif;
    font-weight: 600;
+   text-align: left;
+   white-space: pre-wrap;
+   white-space: -moz-pre-wrap;
+   white-space: -pre-wrap;
+   white-space: -o-pre-wrap;
+   word-wrap: break-word;
  }
 
  #comment>iframe{
