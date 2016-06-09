@@ -3,8 +3,8 @@
 require('general.php');
 header("Content-Type:application/json; charset=utf-8");
 
-$no = isset($_POST['no']) ? intVal($_POST['no']) : 1;
-$subNo = isset($_POST['subNo']) ? intVal($_POST['subNo']) : 1;
+$no = 1;
+$subNo = 1;
 
 $category = isset($_POST['category']) ? intVal($_POST['category']) : 0;
 $tags = isset($_POST['tags']) ? $_POST['tags'] : '';
