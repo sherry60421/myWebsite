@@ -18,7 +18,7 @@ while($stmt->fetch()){
 }
 
 $return = array();
-$stmt = $conn->prepare("SELECT `CATEGORY`,`DESC`,`ARTICLE`.`NO`,`SUBNO`,`TAGS`,`MAIN_TITLE_MENU`,`SUB_TITLE_MENU`, `MAX_PUBLISH_DATE` AS `PUBLISH_DATE`,`IS_CONTINUED`
+$stmt = $conn->prepare("SELECT `CATEGORY`,`DESC`,`ARTICLE`.`NO`,`SUBNO`,`TAGS`,`MAIN_TITLE_MENU`,`SUB_TITLE_MENU`, `MAX_PUBLISH_DATE` AS `PUBLISH_DATE`,`IS_END`
   FROM `ARTICLE`,`CATEGORY`,
   ( SELECT `ARTICLE`.`NO`, MAX(`PUBLISH_DATE`) AS `MAX_PUBLISH_DATE`
     FROM `ARTICLE`
@@ -32,7 +32,7 @@ $stmt = $conn->prepare("SELECT `CATEGORY`,`DESC`,`ARTICLE`.`NO`,`SUBNO`,`TAGS`,`
   ORDER BY `CATEGORY`, `ARTICLE`.`NO`, `SUBNO`");
 echo $conn->error;
 $stmt->execute();
-$stmt->bind_result($category, $categoryDesc, $no, $subNo, $tags, $mainTitleMenu, $subTitleMenu, $publishDate, $isContinued);
+$stmt->bind_result($category, $categoryDesc, $no, $subNo, $tags, $mainTitleMenu, $subTitleMenu, $publishDate, $isEnd);
 
 //先匯整
 $tmp_category = "";
@@ -47,7 +47,7 @@ while($stmt->fetch()){
   'mainTitleMenu' => $mainTitleMenu,
   'subTitleMenu' => $subTitleMenu,
   'publishDate' => $publishDate,
-  'isContinued' => $isContinued);
+  'isEnd' => $isEnd);
   array_push($return, $article);
 }
 // //補上分類名

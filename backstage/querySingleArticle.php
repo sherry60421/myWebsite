@@ -14,7 +14,7 @@ $stmt = $conn->prepare("SELECT `CATEGORY`,
   `SUB_TITLE`,
   `SUB_TITLE_MENU`,
   `IS_MULTIPLE`,
-  `IS_CONTINUED`,
+  `IS_END`,
   `CREATE_DATE`,
   `PUBLISH_DATE`,
   `CONTENT`,
@@ -31,7 +31,7 @@ $stmt = $conn->prepare("SELECT `CATEGORY`,
 echo $conn->error;
 $stmt->bind_param("ii", $no, $subNo);
 $stmt->execute();
-$stmt->bind_result($category, $tags, $mainTitle, $mainTitleMenu, $subTitle, $subTitleMenu, $isMultiple, $isContinued,
+$stmt->bind_result($category, $tags, $mainTitle, $mainTitleMenu, $subTitle, $subTitleMenu, $isMultiple, $isEnd,
 $createDate, $publishDate, $content, $commentUrl, $originUrl, $isVisible, $memo, $no, $subNo);
 
 while($stmt->fetch()){
@@ -42,7 +42,7 @@ while($stmt->fetch()){
     'mainTitleMenu' => $mainTitleMenu,
     'subTitleMenu' => $subTitleMenu,
     'isMultiple' => $isMultiple,
-    'isContinued' => $isContinued,
+    'isEnd' => $isEnd,
     'content' => $content,
     'createDate' => $createDate,
     'publishDate' => $publishDate,

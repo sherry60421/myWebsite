@@ -135,7 +135,7 @@
                             <input type="checkbox" name="isMultiple"> 是否多篇
                           </label>
                           <label style="display:none;">
-                            <input type="checkbox" name="isContinued"> 是否未完結
+                            <input type="checkbox" name="isEnd"> 是否完結
                           </label>
                         </div>
                       </div>

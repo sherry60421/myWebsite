@@ -90,7 +90,7 @@ function putArticleAttribute(data, opt){
     $("[name='mainTitleMenu']").val("");
     $("[name='isMultiple']").prop("checked", false);
     $("[name='isMultiple']").change();
-    $("[name='isContinued']").prop("checked", true);
+    $("[name='isEnd']").prop("checked", true);
     $("[name='subTitle']").val("");
     $("[name='subTitleMenu']").val("");
     $("[name='createDate']").val("");
@@ -127,10 +127,10 @@ function putArticleAttribute(data, opt){
     else if(data.isMultiple === 0)
       $("[name='isMultiple']").prop("checked", false);
     $("[name='isMultiple']").change();
-    if(data.isContinued === 1)
-      $("[name='isContinued']").prop("checked", true);
-    else if(data.isContinued === 0)
-      $("[name='isContinued']").prop("checked", false);
+    if(data.isEnd === 1)
+      $("[name='isEnd']").prop("checked", true);
+    else if(data.isEnd === 0)
+      $("[name='isEnd']").prop("checked", false);
     $("[name='subTitle']").val(data.subTitle);
     $("[name='subTitleMenu']").val(data.subTitleMenu);
     $("[name='createDate']").val(data.createDate);
@@ -213,7 +213,7 @@ function getAllFieldValue(){
     "mainTitle" : $("[name='mainTitle']").val(),
     "mainTitleMenu" : $("[name='mainTitleMenu']").val(),
     "isMultiple" : $("[name='isMultiple']").prop("checked") ? "1" : "0",
-    "isContinued" : $("[name='isContinued']").prop("checked") ? "1" : "0",
+    "isEnd" : $("[name='isEnd']").prop("checked") ? "1" : "0",
     "subTitle" : $("[name='subTitle']").val(),
     "subTitleMenu" : $("[name='subTitleMenu']").val(),
     "createDate" : $("[name='createDate']").val(),
@@ -287,17 +287,17 @@ $("[name='isMultiple']").change(function(){
   checked = $(this).prop("checked");
   // 多篇
   if(checked){
-    $("[name='isContinued']").closest("label").css("display", "initial");
+    $("[name='isEnd']").closest("label").css("display", "initial");
     $("div[for='multiple']").css("display", "inherit");
     // 多篇預設未完結
-    $("[name='isContinued']").prop("checked", true);
+    $("[name='isEnd']").prop("checked", false);
   }
   // 單篇
   else{
-    $("[name='isContinued']").closest("label").css("display", "none");
+    $("[name='isEnd']").closest("label").css("display", "none");
     $("div[for='multiple']").css("display", "none");
     // 單篇預設已完結
-    $("[name='isContinued']").prop("checked", false);
+    $("[name='isEnd']").prop("checked", true);
     $("[name='subTitle']").val("");
     $("[name='subTitleMenu']").val("");
   }

@@ -18,7 +18,7 @@ $createDate = isset($_POST['createDate']) ? $_POST['createDate'] : '';
 $publishDate = isset($_POST['publishDate']) ? $_POST['publishDate'] : '';
 $isVisible = isset($_POST['isVisible']) ? intVal($_POST['isVisible']) : 0;
 $isMultiple = isset($_POST['isMultiple']) ? intVal($_POST['isMultiple']) : 0;
-$isContinued = isset($_POST['isContinued']) ? intVal($_POST['isContinued']) : 0;
+$isEnd = isset($_POST['isEnd']) ? intVal($_POST['isEnd']) : 0;
 $commentUrl = isset($_POST['commentUrl']) ? $_POST['commentUrl'] : '';
 $originUrl = isset($_POST['originUrl']) ? $_POST['originUrl'] : '';
 
@@ -63,7 +63,7 @@ $stmt = $conn->prepare("INSERT INTO `ARTICLE`(
   `PUBLISH_DATE`,
   `IS_VISIBLE`,
   `IS_MULTIPLE`,
-  `IS_CONTINUED`,
+  `IS_END`,
   `COMMENT_URL`,
   `ORIGIN_URL`,
   `HITS`,
@@ -71,7 +71,7 @@ $stmt = $conn->prepare("INSERT INTO `ARTICLE`(
 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?)");
 echo $conn->error;
 $stmt->bind_param("iiissssssssiiisss", $no, $subNo, $category, $tags, $mainTitle, $subTitle, $mainTitleMenu, $subTitleMenu,
-  $content, $createDate, $publishDate, $isVisible, $isMultiple, $isContinued, $commentUrl, $originUrl, $memo);
+  $content, $createDate, $publishDate, $isVisible, $isMultiple, $isEnd, $commentUrl, $originUrl, $memo);
 
 $stmt->execute();
 $conn->close();

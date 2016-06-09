@@ -130,7 +130,7 @@ function addMenu(data, cateNo){
       $newPara.append($mainTitle);
       $newPara.append("<br/>");
       for(j=0; j<articles[i].length; j++){
-        var isNotEnd = articles[i][j].isContinued === "1" ? "(未完)" : "(完)";
+        var isNotEnd = articles[i][j].isEnd === "1" ? "(完)" : "(未完)";
         var thisTitleText = articles[i][j].subTitleMenu
                     + (j === articles[i].length-1 ? isNotEnd : "");
         var $subTitle = $("<a/>").attr("data-no", articles_no).attr("data-subno", articles[i][j].subNo)
