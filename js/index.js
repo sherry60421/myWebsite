@@ -216,6 +216,7 @@ function registerMenuLink(){
             span.addClass("glyphicon-menu-down");
         });
         $(".paper").animate({"opacity" : 1}, 500);
+        $("body").scrollTop(0);
       },
       fail: function(jqXHR, textStatus, errorThrown){
         console.log(errorThrown);

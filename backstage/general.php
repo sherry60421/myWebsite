@@ -4,9 +4,9 @@ header("Content-Type:text/html; charset=utf-8");
 
 if($_SERVER["HTTP_HOST"] == "localhost"){
   $host = 'localhost';
-  $dbUsername = '2141104_myweb'; // 2141104_myweb / adminCMBRcMd
-  $dbPassword = 'MxxBDNqJPv0626'; // MxxBDNqJPv0626 / yk819N-UCj3x
-  $dbName = '2141104_myweb'; // 2141104_myweb / myweb
+  $dbUsername = 'adminCMBRcMd'; // 2141104_myweb / adminCMBRcMd
+  $dbPassword = 'yk819N-UCj3x'; // MxxBDNqJPv0626 / yk819N-UCj3x
+  $dbName = 'myweb'; // 2141104_myweb / myweb
 }
 else{
   $host = 'localhost';
