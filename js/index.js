@@ -5,6 +5,7 @@ var queryString = function () {
 
 var start = function(){
   mainMenuPageActive(queryString.page);
+  getGitHistory();
   buildNovelMenu();
   novelDisplay(queryString.page, queryString.novelNo, queryString.novelSubNo);
 }();
@@ -28,9 +29,9 @@ function parameterToJson(url){
 
 // 一開始進入的頁面切換
 function mainMenuPageActive(page){
-  //預設-目前暫時跑Novel
+  //預設
   if(page === undefined){
-    page = "novel";
+    page = "home";
   }
   var tab_panes = $(".tab-pane");
   var tab_menus = $("#navbar").find("li");
@@ -54,6 +55,37 @@ function mainMenuPageActive(page){
     if($(tab_panes[i]).attr("id").replace("#","") === page)
       $(tab_panes[i]).addClass("in active");
   }
+}
+
+// git history
+function getGitHistory(){
+  $.ajax({
+    url: "https://api.github.com/repos/sherry60421/myWebsite/releases",
+    dataType: "json",
+    success: function(data, textStatus, jqXHR){
+      if(data.length > 0){
+        var $table = $("<table/>");
+        for(i=0; i<data.length; i++){
+          $tr = $("<tr/>");
+          $tr.append($("<td/>").addClass("first left").text(data[i].tag_name));
+          var body = "<p>" + data[i].body.split("\r\n").join("</p><p>") + "</p>";
+          $tr.append($("<td/>").addClass("first right").attr("rowspan", "2").html(body));
+          $tr2 = $("<tr/>");
+          if(i < data.length - 1){ // 不是最後一列不加分隔線
+            $tr2.css("border-bottom", "solid 1px");
+          }
+          publishedDate = new Date(Date.parse(data[i].published_at));
+          $tr2.append($("<td/>").addClass("left").text(publishedDate.toLocaleDateString()));
+          $table.append($tr);
+          $table.append($tr2);
+        }
+        $("#home .version").append($table);
+      }
+    },
+    fail: function(jqXHR, textStatus, errorThrown){
+      console.log(errorThrown);
+    }
+  });
 }
 
 var tagOrder = ['tag-primary', 'tag-success', 'tag-warning', 'tag-danger'];
@@ -84,42 +116,42 @@ function buildNovelMenu(){
       data = sortData(data, categoryArr);
       //先放第一個分類
       addMenu(data, categoryArr[0].categoryNo);
-      $(".tag").click(function(){
+      $("#novel .tag").click(function(){
         //內容調整
-        $(".folder>.folder-content").html("");
+        $("#novel .folder>.folder-content").html("");
         var category = $($(this).find("a[data-cateNo]")[0]).attr("data-cateNo");
         addMenu(data, Number(category));
         //背景樣式調整
         var tag_class = $(this).attr("class").replace("tag ", "");
         for(i = 0; i < tagOrder.length; i++){
           if(tag_class.indexOf(tagOrder[i]) !== -1){
-            $(".folder>.folder-content").removeClass("folder-content-success folder-content-warning folder-content-danger folder-content-primary");
-            $(".folder>.folder-content").addClass(tagOrder[i].replace("tag", "folder-content"));
-            $(".folder>.mobile-bar").removeClass("tag-primary tag-success tag-warning tag-danger");
-            $(".folder>.mobile-bar").addClass(tagOrder[i]);
+            $("#novel .folder>.folder-content").removeClass("folder-content-success folder-content-warning folder-content-danger folder-content-primary");
+            $("#novel .folder>.folder-content").addClass(tagOrder[i].replace("tag", "folder-content"));
+            $("#novel .folder>.mobile-bar").removeClass("tag-primary tag-success tag-warning tag-danger");
+            $("#novel .folder>.mobile-bar").addClass(tagOrder[i]);
           }
         }
       });
       //mobile-bar
-      $(".mobile-bar").click(function(){
-        if($(".folder > .mobile-bar").is(":hidden")){
+      $("#novel .mobile-bar").click(function(){
+        if($("#novel .folder > .mobile-bar").is(":hidden")){
           return;
         }
         isOpenMenu = !isOpenMenu;
-        $($(".folder > .mobile-bar").find("span")[0]).removeClass("glyphicon-menu-right glyphicon-menu-left");
+        $($("#novel .folder > .mobile-bar").find("span")[0]).removeClass("glyphicon-menu-right glyphicon-menu-left");
         // 是要開啟
         if(isOpenMenu){
-          $(".folder > .folder-content").animate({"left": "0%"}, 500);
-          $(".folder > .mobile-bar").animate({"opacity" : 1, "left": "93%"}, 500);
-          $(".folder .tags").animate({"left": "0%"}, 500);
-          $($(".folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-left");
+          $("#novel .folder > .folder-content").animate({"left": "0%"}, 500);
+          $("#novel .folder > .mobile-bar").animate({"opacity" : 1, "left": "93%"}, 500);
+          $("#novel .folder .tags").animate({"left": "0%"}, 500);
+          $($("#novel .folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-left");
         }
         // 還是關上呢
         else{
-          $(".folder > .folder-content").animate({"left": "-93%"}, 500);
-          $(".folder > .mobile-bar").animate({"opacity" : 0.5, "left": "0%"}, 500);
-          $(".folder .tags").animate({"left": "-93%"}, 500);
-          $($(".folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-right");
+          $("#novel .folder > .folder-content").animate({"left": "-93%"}, 500);
+          $("#novel .folder > .mobile-bar").animate({"opacity" : 0.5, "left": "0%"}, 500);
+          $("#novel .folder .tags").animate({"left": "-93%"}, 500);
+          $($("#novel .folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-right");
         }
       });
     },
@@ -206,7 +238,7 @@ function addMenu(data, cateNo){
       .text(articles[i][0].mainTitleMenu).addClass("mainTitle");
       $newPara.append($mainTitle);
     }
-    $(".folder>.folder-content").append($newPara);
+    $("#novel .folder>.folder-content").append($newPara);
   }
   registerMenuLink();
 }
@@ -227,7 +259,7 @@ function tagsFormatter(value){
 
 // 註冊click行為,加文章
 function registerMenuLink(){
-  $(".folder-content>p>a").click(function(){
+  $("#novel .folder-content>p>a").click(function(){
     var no = Number($(this).attr("data-no"));
     var subNo = Number($(this).attr("data-subno"));
     novelDisplay("novel", no, subNo);
@@ -245,6 +277,8 @@ function novelDisplay(page, no, subNo){
     data: { "no" : no, "subNo" : subNo },
     dataType: "json",
     success: function(data, textStatus, jqXHR){
+      $("#novel .paper").html("");
+      $("#novel .copyurl").remove();
       // link
       var parameter = parameterToJson(this.data);
       var copyurl = '<button type="button" class="btn btn-xs copy" data-clipboard-text="'
@@ -254,10 +288,9 @@ function novelDisplay(page, no, subNo){
                     + '"><i class="fa fa-paperclip fa-5x fa-rotate-45" aria-hidden="true"></i></button>';
       $urldiv = $("<div/>").addClass("copyurl").append(copyurl);
       new Clipboard('.copy');
-      $urldiv.insertBefore(".paper");
+      $urldiv.insertBefore("#novel .paper");
       // paper
-      $(".paper").html("");
-      $(".paper").css("opacity", 0);
+      $("#novel .paper").css("opacity", 0);
       var publishDate = moment(data.publishDate);
       var table_html = '<table><tr class="date-tr-1"><td>'
                         + publishDate.format("MMM")
@@ -281,10 +314,10 @@ function novelDisplay(page, no, subNo){
       $heading = $("<div/>").addClass("heading");
       $heading.append($date);
       $heading.append($title);
-      $(".paper").append($heading);
-      $(".paper").append($content);
-      $(".paper").append(typeof($memo) === "undefined" ? "" : $memo);
-      $(".paper").append(typeof($comment) === "undefined" ? "" : $comment);
+      $("#novel .paper").append($heading);
+      $("#novel .paper").append($content);
+      $("#novel .paper").append(typeof($memo) === "undefined" ? "" : $memo);
+      $("#novel .paper").append(typeof($comment) === "undefined" ? "" : $comment);
       // collapse event
       $('#memo,#comment').on('show.bs.collapse hide.bs.collapse', function (event) {
         var span = $($("#"+$(this).attr("id")).prev("a").find("span")[0]);
@@ -294,7 +327,7 @@ function novelDisplay(page, no, subNo){
         else
           span.addClass("glyphicon-menu-down");
       });
-      $(".paper").animate({"opacity" : 1}, 500);
+      $("#novel .paper").animate({"opacity" : 1}, 500);
       $("body").scrollTop(0);
     },
     fail: function(jqXHR, textStatus, errorThrown){
