@@ -50,8 +50,7 @@
       <div id="toolbar">
         <div class="form-inline">
           <div class="form-group">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#newArticle" insert>新增文章</button>
-            <button class="btn btn-warning" data-toggle="modal" data-target="#newArticle">Revoke Modal</button>
+            <button class="btn btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#newArticle" insert>新增文章</button>
           </div>
         </div>
       </div>

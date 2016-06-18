@@ -6788,7 +6788,7 @@
         'Tahoma', 'Times New Roman', 'Verdana'
       ],
 
-      fontSizes: ['10', '12', '13', '16', '20', '24', '32', '36', '40'],
+      fontSizes: ['10', '12', '13', '16', '18', '20', '24', '32', '36', '40'],
 
       // pallete colors(n x n)
       colors: [

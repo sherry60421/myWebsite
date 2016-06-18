@@ -1,73 +1,133 @@
+// GET進入
+var queryString = function () {
+  return parameterToJson(window.location.search.substring(1))
+}();
+
+var start = function(){
+  mainMenuPageActive(queryString.page);
+  buildNovelMenu();
+  novelDisplay(queryString.page, queryString.novelNo, queryString.novelSubNo);
+}();
+
+function parameterToJson(url){
+  var query_string = {};
+  var vars = url.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = decodeURIComponent(pair[1]);
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+      query_string[pair[0]] = arr;
+    } else {
+      query_string[pair[0]].push(decodeURIComponent(pair[1]));
+    }
+  }
+  return query_string;
+}
+
+// 一開始進入的頁面切換
+function mainMenuPageActive(page){
+  //預設-目前暫時跑Novel
+  if(page === undefined){
+    page = "novel";
+  }
+  var tab_panes = $(".tab-pane");
+  var tab_menus = $("#navbar").find("li");
+  var tab_links = $("#navbar").find("a[data-toggle='tab']");
+  tab_menus.removeClass("active");
+  tab_panes.removeClass("in active");
+  // menu active
+  for(i=0; i<tab_links.length; i++){
+    if($(tab_links[i]).attr("href").replace("#","") === page){
+      if($(tab_links[i]).closest("ul").hasClass("dropdown-menu")){
+        $(tab_links[i]).addClass("active");
+        $(tab_links[i]).closest("li[class='dropdown']").addClass("active");
+      }
+      else{
+        $(tab_links[i]).closest("li").addClass("active");
+      }
+    }
+  }
+  // tab active
+  for(i=0; i<tab_panes.length; i++){
+    if($(tab_panes[i]).attr("id").replace("#","") === page)
+      $(tab_panes[i]).addClass("in active");
+  }
+}
 
 var tagOrder = ['tag-primary', 'tag-success', 'tag-warning', 'tag-danger'];
 var isOpenMenu = false;// for mobile
-// 抓現有的category建立folder tag(待加文章!!!)
-$.ajax({
-  url: "backstage/selectMenu.php",
-  dataType: "json",
-  success: function(data, textStatus, jqXHR){
-    $div = $($("#novel").find(".folder")[0]);
 
-    var categoryArr = getCategoryData(data);
-    if(categoryArr.length == 0){
-      return;
-    }
-    $("<div class='mobile-bar tag-primary'><span class='glyphicon glyphicon-menu-right'></span></div>").appendTo($div);
-    $("<div class='folder-content folder-content-primary'></div>").appendTo($div);
-    $("<div class='tags'></div>").appendTo($div);
-    for(i=0; i<categoryArr.length; i++){
-      $tags = $($div.find('.tags')[0]);
-      var $newTag = $("<div class='tag'></div>").addClass(tagOrder[i%5]);
-      $newTag.append('<a data-cateNo="' + categoryArr[i].categoryNo + '">' + categoryArr[i].categoryDesc + '</a>');
-      $newTag.appendTo($tags);
-    }
-    //排序
-    data = sortData(data, categoryArr);
-    //先放第一個分類
-    addMenu(data, categoryArr[0].categoryNo);
-    $(".tag").click(function(){
-      //內容調整
-      $(".folder>.folder-content").html("");
-      var category = $($(this).find("a[data-cateNo]")[0]).attr("data-cateNo");
-      addMenu(data, Number(category));
-      //背景樣式調整
-      var tag_class = $(this).attr("class").replace("tag ", "");
-      for(i = 0; i < tagOrder.length; i++){
-        if(tag_class.indexOf(tagOrder[i]) !== -1){
-          $(".folder>.folder-content").removeClass("folder-content-success folder-content-warning folder-content-danger folder-content-primary");
-          $(".folder>.folder-content").addClass(tagOrder[i].replace("tag", "folder-content"));
-          $(".folder>.mobile-bar").removeClass("tag-primary tag-success tag-warning tag-danger");
-          $(".folder>.mobile-bar").addClass(tagOrder[i]);
-        }
-      }
-    });
-    //mobile-bar
-    $(".mobile-bar").click(function(){
-      if($(".folder > .mobile-bar").is(":hidden")){
+// 抓現有的category建立folder tag
+function buildNovelMenu(){
+  $.ajax({
+    url: "backstage/selectMenu.php",
+    dataType: "json",
+    success: function(data, textStatus, jqXHR){
+      $div = $($("#novel").find(".folder")[0]);
+
+      var categoryArr = getCategoryData(data);
+      if(categoryArr.length == 0){
         return;
       }
-      isOpenMenu = !isOpenMenu;
-      $($(".folder > .mobile-bar").find("span")[0]).removeClass("glyphicon-menu-right glyphicon-menu-left");
-      // 是要開啟
-      if(isOpenMenu){
-        $(".folder > .folder-content").animate({"left": "0%"}, 500);
-        $(".folder > .mobile-bar").animate({"opacity" : 1, "left": "93%"}, 500);
-        $(".folder .tags").animate({"left": "0%"}, 500);
-        $($(".folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-left");
+      $("<div class='mobile-bar tag-primary'><span class='glyphicon glyphicon-menu-right'></span></div>").appendTo($div);
+      $("<div class='folder-content folder-content-primary'></div>").appendTo($div);
+      $("<div class='tags'></div>").appendTo($div);
+      for(i=0; i<categoryArr.length; i++){
+        $tags = $($div.find('.tags')[0]);
+        var $newTag = $("<div class='tag'></div>").addClass(tagOrder[i%5]);
+        $newTag.append('<a data-cateNo="' + categoryArr[i].categoryNo + '">' + categoryArr[i].categoryDesc + '</a>');
+        $newTag.appendTo($tags);
       }
-      // 還是關上呢
-      else{
-        $(".folder > .folder-content").animate({"left": "-93%"}, 500);
-        $(".folder > .mobile-bar").animate({"opacity" : 0.5, "left": "0%"}, 500);
-        $(".folder .tags").animate({"left": "-93%"}, 500);
-        $($(".folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-right");
-      }
-    });
-  },
-  fail: function(jqXHR, textStatus, errorThrown){
-    console.log(errorThrown);
-  }
-});
+      //排序
+      data = sortData(data, categoryArr);
+      //先放第一個分類
+      addMenu(data, categoryArr[0].categoryNo);
+      $(".tag").click(function(){
+        //內容調整
+        $(".folder>.folder-content").html("");
+        var category = $($(this).find("a[data-cateNo]")[0]).attr("data-cateNo");
+        addMenu(data, Number(category));
+        //背景樣式調整
+        var tag_class = $(this).attr("class").replace("tag ", "");
+        for(i = 0; i < tagOrder.length; i++){
+          if(tag_class.indexOf(tagOrder[i]) !== -1){
+            $(".folder>.folder-content").removeClass("folder-content-success folder-content-warning folder-content-danger folder-content-primary");
+            $(".folder>.folder-content").addClass(tagOrder[i].replace("tag", "folder-content"));
+            $(".folder>.mobile-bar").removeClass("tag-primary tag-success tag-warning tag-danger");
+            $(".folder>.mobile-bar").addClass(tagOrder[i]);
+          }
+        }
+      });
+      //mobile-bar
+      $(".mobile-bar").click(function(){
+        if($(".folder > .mobile-bar").is(":hidden")){
+          return;
+        }
+        isOpenMenu = !isOpenMenu;
+        $($(".folder > .mobile-bar").find("span")[0]).removeClass("glyphicon-menu-right glyphicon-menu-left");
+        // 是要開啟
+        if(isOpenMenu){
+          $(".folder > .folder-content").animate({"left": "0%"}, 500);
+          $(".folder > .mobile-bar").animate({"opacity" : 1, "left": "93%"}, 500);
+          $(".folder .tags").animate({"left": "0%"}, 500);
+          $($(".folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-left");
+        }
+        // 還是關上呢
+        else{
+          $(".folder > .folder-content").animate({"left": "-93%"}, 500);
+          $(".folder > .mobile-bar").animate({"opacity" : 0.5, "left": "0%"}, 500);
+          $(".folder .tags").animate({"left": "-93%"}, 500);
+          $($(".folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-right");
+        }
+      });
+    },
+    fail: function(jqXHR, textStatus, errorThrown){
+      console.log(errorThrown);
+    }
+  });
+}
 
 //取得分類
 function getCategoryData(data){
@@ -170,58 +230,76 @@ function registerMenuLink(){
   $(".folder-content>p>a").click(function(){
     var no = Number($(this).attr("data-no"));
     var subNo = Number($(this).attr("data-subno"));
-    $.ajax({
-      url: "backstage/querySingleArticle_front.php",
-      method: "post",
-      data: { "no" : no, "subNo" : subNo },
-      dataType: "json",
-      success: function(data, textStatus, jqXHR){
-        $(".paper").html("");
-        $(".paper").css("opacity", 0);
-        var publishDate = moment(data.publishDate);
-        var table_html = '<table><tr class="date-tr-1"><td>'
-                          + publishDate.format("MMM")
-                          + '</td><td>'
-                          + publishDate.format("YYYY")
-                          + '</td></tr><tr class="date-tr-2"><td colspan="2">'
-                          + publishDate.format("DD")
-                          + '</td></tr></table>';
-        $date = $("<div/>").addClass("date").html(table_html);
-        $title = $("<div/>").addClass("title").text(data.mainTitle + (data.subTitle === "" ? "" : "(" + data.subTitle + ")"));
-        $content = $("<div/>").addClass("text").html(data.content);
-        $memo = undefined; $comment = undefined;
-        if(typeof(data.memo) !== "undefined" && data.memo !== ""){
-          $memo = $("<div/>").addClass("memo").append('<a data-toggle="collapse" data-target="#memo">後記 <span class="glyphicon glyphicon-menu-down"></span></a>')
-          .append('<div id="memo" class="collapse"><pre>'+data.memo+'</pre></div>');
-        }
-        if(typeof(data.commentUrl) !== "undefined" && data.commentUrl !== ""){
-          $comment = $("<div/>").addClass("comment").append('<a data-toggle="collapse" data-target="#comment">回應(Lofter) <span class="glyphicon glyphicon-menu-down"></span></a>')
-          .append('<div id="comment" class="collapse"><iframe src="'+data.commentUrl+'"></iframe></div>');
-        }
+    novelDisplay("novel", no, subNo);
+  });
+}
 
-        $heading = $("<div/>").addClass("heading");
-        $heading.append($date);
-        $heading.append($title);
-        $(".paper").append($heading);
-        $(".paper").append($content);
-        $(".paper").append(typeof($memo) === "undefined" ? "" : $memo);
-        $(".paper").append(typeof($comment) === "undefined" ? "" : $comment);
-        // collapse event
-        $('#memo,#comment').on('show.bs.collapse hide.bs.collapse', function (event) {
-          var span = $($("#"+$(this).attr("id")).prev("a").find("span")[0]);
-          span.removeClass("glyphicon-menu-down glyphicon-menu-up");
-          if(event.type === "show")
-            span.addClass("glyphicon-menu-up");
-          else
-            span.addClass("glyphicon-menu-down");
-        });
-        $(".paper").animate({"opacity" : 1}, 500);
-        $("body").scrollTop(0);
-      },
-      fail: function(jqXHR, textStatus, errorThrown){
-        console.log(errorThrown);
+// 文章顯示 window.location.hostname+window.location.pathname
+function novelDisplay(page, no, subNo){
+  if(page !== 'novel'){
+    return;
+  }
+  $.ajax({
+    url: "backstage/querySingleArticle_front.php",
+    method: "post",
+    data: { "no" : no, "subNo" : subNo },
+    dataType: "json",
+    success: function(data, textStatus, jqXHR){
+      // link
+      var parameter = parameterToJson(this.data);
+      var copyurl = '<button type="button" class="btn btn-xs copy" data-clipboard-text="'
+                    + window.location.hostname
+                    + window.location.pathname
+                    + '?page=novel&novelNo=' + parameter.no + "&novelSubNo=" + parameter.subNo
+                    + '"><i class="fa fa-paperclip fa-5x fa-rotate-45" aria-hidden="true"></i></button>';
+      $urldiv = $("<div/>").addClass("copyurl").append(copyurl);
+      new Clipboard('.copy');
+      $urldiv.insertBefore(".paper");
+      // paper
+      $(".paper").html("");
+      $(".paper").css("opacity", 0);
+      var publishDate = moment(data.publishDate);
+      var table_html = '<table><tr class="date-tr-1"><td>'
+                        + publishDate.format("MMM")
+                        + '</td><td>'
+                        + publishDate.format("YYYY")
+                        + '</td></tr><tr class="date-tr-2"><td colspan="2">'
+                        + publishDate.format("DD")
+                        + '</td></tr></table>';
+      $date = $("<div/>").addClass("date").html(table_html);
+      $title = $("<div/>").addClass("title").text(data.mainTitle + (data.subTitle === "" ? "" : "(" + data.subTitle + ")"));
+      $content = $("<div/>").addClass("text").html(data.content);
+      $memo = undefined; $comment = undefined;
+      if(typeof(data.memo) !== "undefined" && data.memo !== ""){
+        $memo = $("<div/>").addClass("memo").append('<a data-toggle="collapse" data-target="#memo">後記 <span class="glyphicon glyphicon-menu-down"></span></a>')
+        .append('<div id="memo" class="collapse"><pre>'+data.memo+'</pre></div>');
       }
-    });
+      if(typeof(data.commentUrl) !== "undefined" && data.commentUrl !== ""){
+        $comment = $("<div/>").addClass("comment").append('<a data-toggle="collapse" data-target="#comment">回應(Lofter) <span class="glyphicon glyphicon-menu-down"></span></a>')
+        .append('<div id="comment" class="collapse"><iframe src="'+data.commentUrl+'"></iframe></div>');
+      }
+      $heading = $("<div/>").addClass("heading");
+      $heading.append($date);
+      $heading.append($title);
+      $(".paper").append($heading);
+      $(".paper").append($content);
+      $(".paper").append(typeof($memo) === "undefined" ? "" : $memo);
+      $(".paper").append(typeof($comment) === "undefined" ? "" : $comment);
+      // collapse event
+      $('#memo,#comment').on('show.bs.collapse hide.bs.collapse', function (event) {
+        var span = $($("#"+$(this).attr("id")).prev("a").find("span")[0]);
+        span.removeClass("glyphicon-menu-down glyphicon-menu-up");
+        if(event.type === "show")
+          span.addClass("glyphicon-menu-up");
+        else
+          span.addClass("glyphicon-menu-down");
+      });
+      $(".paper").animate({"opacity" : 1}, 500);
+      $("body").scrollTop(0);
+    },
+    fail: function(jqXHR, textStatus, errorThrown){
+      console.log(errorThrown);
+    }
   });
 }
 
