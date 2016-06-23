@@ -2,6 +2,7 @@
 @font-face {
   font-family: 'TitleFont';
   src: url(../fonts/NotoSansTC-Bold.otf) format('opentype');
+  src: url(../fonts/NotoSansSC-Bold.otf) format('opentype');
 }
 
 /* Latin characters 專用 */
@@ -32,6 +33,7 @@
 @font-face {
   font-family: 'GeneralFont';
   src: url(../fonts/NotoSansTC-Thin.otf) format('opentype');
+  src: url(../fonts/NotoSansSC-Thin.otf) format('opentype');
 }
 
 /* Latin characters 專用 */
@@ -63,36 +65,42 @@
   font-style: normal;
   font-weight: 100;
   src: url(../fonts/NotoSansTC-Thin.otf) format('opentype');
+  src: url(../fonts/NotoSansSC-Thin.otf) format('opentype');
 }
 @font-face {
   font-family: 'Noto Sans TC Light';
   font-style: normal;
   font-weight: 300;
   src: url(../fonts/NotoSansTC-Light.otf) format('opentype');
+  src: url(../fonts/NotoSansSC-Light.otf) format('opentype');
 }
 @font-face {
    font-family: 'Noto Sans TC Regular';
    font-style: normal;
    font-weight: 400;
    src: url(../fonts/NotoSansTC-Regular.otf) format('opentype');
+   src: url(../fonts/NotoSansSC-Regular.otf) format('opentype');
  }
 @font-face {
    font-family: 'Noto Sans TC Medium';
    font-style: normal;
    font-weight: 500;
    src: url(../fonts/NotoSansTC-Medium.otf) format('opentype');
+   src: url(../fonts/NotoSansSC-Medium.otf) format('opentype');
  }
 @font-face {
    font-family: 'Noto Sans TC Bold';
    font-style: normal;
    font-weight: 700;
    src: url(../fonts/NotoSansTC-Bold.otf) format('opentype');
+   src: url(../fonts/NotoSansSC-Bold.otf) format('opentype');
  }
 @font-face {
    font-family: 'Noto Sans TC Black';
    font-style: normal;
    font-weight: 900;
    src: url(../fonts/NotoSansTC-Black.otf) format('opentype');
+   src: url(../fonts/NotoSansSC-Black.otf) format('opentype');
  }
  @font-face {
    font-family: 'monaco';

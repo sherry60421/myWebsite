@@ -80,6 +80,7 @@ function getGitHistory(){
           $table.append($tr2);
         }
         $("#home .version").append($table);
+        translateBody();
       }
     },
     fail: function(jqXHR, textStatus, errorThrown){
@@ -154,6 +155,7 @@ function buildNovelMenu(){
           $($("#novel .folder > .mobile-bar").find("span")[0]).addClass("glyphicon-menu-right");
         }
       });
+      translateBody();
     },
     fail: function(jqXHR, textStatus, errorThrown){
       console.log(errorThrown);
@@ -329,6 +331,7 @@ function novelDisplay(page, no, subNo){
       });
       $("#novel .paper").animate({"opacity" : 1}, 500);
       $("body").scrollTop(0);
+      translateBody();
     },
     fail: function(jqXHR, textStatus, errorThrown){
       console.log(errorThrown);

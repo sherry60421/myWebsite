@@ -198,9 +198,13 @@ body > .container-fluid {
    background-color: @brand-primary;
   }
   .version table{
-    font-size: 2px;
+    font-size: small;
     background: transparent;
   }
+  .switch-fonttype.for-pc{
+    display: none;
+  }
+
 }
 
 @media (min-width: 768px){
@@ -381,6 +385,10 @@ body > .container-fluid {
     font-size: medium;
     background: transparent;
   }
+
+  .switch-fonttype.for-mobile{
+    display: none;
+  }
 }
 
 .content .copyurl{
@@ -450,4 +458,10 @@ body > .container-fluid {
  }
  .version table tr td.right{
    width: 80%;
+ }
+
+ .switch-fonttype{
+   float: right;
+   padding: 15px 15px;
+   line-height: 20px;
  }
