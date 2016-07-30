@@ -204,6 +204,14 @@ body > .container-fluid {
   .switch-fonttype.for-pc{
     display: none;
   }
+  .paper .offline-text{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 30px;
+  }
+  .paper .offline-info i.fa-angle-double-right:before{
+    content: "\f103";
+  }
 
 }
 
@@ -379,7 +387,12 @@ body > .container-fluid {
    background-color: @brand-primary;
   }
   .paper .text{
+    text-indent: 36px;
+  }
+  .paper .offline-text{
     text-indent: 32px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   .version table{
     font-size: medium;
@@ -417,13 +430,38 @@ body > .container-fluid {
    padding: 20px;
    letter-spacing: 1px;
  }
+ .paper .offline-text{
+   font-size: 16px;
+   letter-spacing: 1px;
+   display: none;
+ }
+ .paper .offline-newest{
+   padding: 20px;
+   display: inline-block;
+   width: 100%;
+ }
 
  .paper .memo, .paper .comment{
    padding: 10px;
    text-align: right;
  }
 
+ .offline-info{
+   padding: 10px;
+   background-color: rgba(255,255,255,0.3);
+   display: inline-block;
+ }
 
+ .offline-info .book-image{
+    background-image: url('../image/book1_test.jpg');
+    width: 100%;
+    background-position: right;
+    height: 192px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+ }
+
+ .paper .offline-info a,  .paper .offline-info a:hover, .paper .offline-info a:focus,
  .paper .memo > a, .paper .memo > a:hover, .paper .memo > a:focus,
  .paper .comment > a, .paper .comment > a:hover, .paper .comment > a:focus,{
    color: @gray-lighter;

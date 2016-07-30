@@ -341,3 +341,8 @@ function novelDisplay(page, no, subNo){
 
 // tooltip
 $('[data-toggle="tooltip"]').tooltip();
+
+// 看試閱
+$(".read-text").click(function(){
+  $(".offline-text").fadeIn(500);
+});
